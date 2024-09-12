@@ -1,0 +1,10 @@
+[project]
+name = "navegavo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "litestar[standard]>=2.11.0",
+    "msgspec>=0.18.6",
+]
