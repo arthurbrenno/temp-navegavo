@@ -3,6 +3,7 @@
 .DEFAULT_GOAL := run
 
 run:
+	clear
 	@echo "Running..."
 	uv run python -m navegavo
 
