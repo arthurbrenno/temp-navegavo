@@ -1085,6 +1085,19 @@ wheels = [
 ]
 
 [[package]]
+name = "llama-index-embeddings-gemini"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-generativeai" },
+    { name = "llama-index-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b2/03/8e48ae5582c38ff15681b2951e5b137d6a563c11e48ce108e1c30662888a/llama_index_embeddings_gemini-0.2.0.tar.gz", hash = "sha256:edfb6ef8687c02bf7ecab16452576502f51f56d030fb1ceb9b2ceaafb4de41d7", size = 2653 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8f/d1/c5a64aff9a41473eea102027a5e99b16a0ac76c23464c71b0abd000615c2/llama_index_embeddings_gemini-0.2.0-py3-none-any.whl", hash = "sha256:89a784d3e3c8eebd57d653750efc70d15354aa447b29f86911f7ac14beaa7abb", size = 2907 },
+]
+
+[[package]]
 name = "llama-index-embeddings-openai"
 version = "0.2.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1512,6 +1525,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "litestar", extra = ["standard"] },
     { name = "llama-index" },
+    { name = "llama-index-embeddings-gemini" },
     { name = "llama-index-llms-gemini" },
     { name = "llama-index-multi-modal-llms-gemini" },
     { name = "loguru" },
@@ -1525,6 +1539,7 @@ dependencies = [
 requires-dist = [
     { name = "litestar", extras = ["standard"], specifier = ">=2.11.0" },
     { name = "llama-index", specifier = ">=0.11.8" },
+    { name = "llama-index-embeddings-gemini", specifier = ">=0.2.0" },
     { name = "llama-index-llms-gemini", specifier = ">=0.3.4" },
     { name = "llama-index-multi-modal-llms-gemini", specifier = ">=0.3.0" },
     { name = "loguru", specifier = ">=0.7.2" },
