@@ -23,9 +23,9 @@ Desenvolvido por: Arthur Brenno Ribeiro Coelho
 Data de criação: 11 de setembro de 2024
 
 Descrição:
-O NavegAVÔ é um assistente digital projetado para facilitar o uso de 
-tecnologia por idosos, promovendo inclusão digital e segurança online. 
-O aplicativo oferece uma variedade de funcionalidades adaptadas às 
+O NavegAVÔ é um assistente digital projetado para facilitar o uso de
+tecnologia por idosos, promovendo inclusão digital e segurança online.
+O aplicativo oferece uma variedade de funcionalidades adaptadas às
 necessidades específicas deste público.
 
 Funcionalidades Principais:
@@ -39,13 +39,16 @@ Funcionalidades Principais:
 8. Personalização: Perfil de usuário adaptável e modo familiar.
 
 NOTA SOBRE A ARQUITETURA:
-Este projeto foi desenvolvido como parte de um trabalho acadêmico com 
-restrições de tempo significativas. Consequentemente, a implementação atual 
-não segue estritamente os princípios de Domain-Driven Design (DDD) e 
-Clean Architecture. Reconhecemos que uma aplicação mais robusta desses 
-conceitos arquiteturais melhoraria a estrutura e a manutenibilidade do código. 
-Futuras iterações do projeto devem considerar uma refatoração para alinhar 
+Este projeto foi desenvolvido como parte de um trabalho acadêmico com
+restrições de tempo significativas. Consequentemente, a implementação atual
+não segue estritamente os princípios de Domain-Driven Design (DDD) e
+Clean Architecture. Reconheço que uma aplicação mais robusta desses
+conceitos arquiteturais melhoraria a estrutura e a manutenibilidade do código.
+Futuras iterações do projeto devem considerar uma refatoração para alinhar
 melhor a implementação com esses princípios de design de software.
+Observe que a injeção de dependência também não está muito bem organizada.
+Isso se deve à falta de tempo para implementar uma solução mais elegante
+devido a sobrecarga de trabalho da Universidade e prazos apertados.
 
 Para mais informações ou permissões, entre em contato com:
 arthur.brenno@uniube.br
@@ -53,7 +56,7 @@ arthur.brenno@uniube.br
 Versão: 1.0.0
 """
 
+from controllers import NavegavoController  # type: ignore
 from litestar import Litestar
 
-
-app = Litestar(route_handlers=[])
+app = Litestar(route_handlers=[NavegavoController], path="/api")
