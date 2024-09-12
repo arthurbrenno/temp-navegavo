@@ -56,7 +56,7 @@ arthur.brenno@uniube.br
 Versão: 1.0.0
 """
 
-from controllers import NavegavoController  # type: ignore
+from .controllers import NavegavoController  # type: ignore
 from litestar import Litestar
 
 app = Litestar(route_handlers=[NavegavoController], path="/api")
