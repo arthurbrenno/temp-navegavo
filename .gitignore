@@ -163,7 +163,6 @@ cython_debug/
 *.tape
 .env.production
 .env.test
-.env.example
 langchain.db
 ./.langchain.db
 *.langchain.db
