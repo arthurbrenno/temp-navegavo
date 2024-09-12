@@ -1,6 +1,6 @@
-from .requests import 
-from .responses import 
+from __future__ import annotations
 
-__all__: list = [
-    
-]
+from .requests import ScreenInfoRequest
+from .responses import ScreenInfoResponse
+
+__all__: list = ["ScreenInfoRequest", "ScreenInfoResponse"]
