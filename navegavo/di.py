@@ -1,6 +1,0 @@
-from llama_index.core.multi_modal_llms.base import MultiModalLLM
-from llama_index.multi_modal_llms.gemini import GeminiMultiModal  # type: ignore
-
-
-async def llm_factory() -> MultiModalLLM:
-    return GeminiMultiModal()
