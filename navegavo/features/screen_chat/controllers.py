@@ -14,7 +14,7 @@ from .schema import ScreenInfoRequest, ScreenInfoResponse
 from .services import ScreenChatService
 
 
-class NavegavoController(Controller):
+class ScreenChatController(Controller):
     path = "/v1"
     dependencies = {"llm": Provide(llm_factory), "service": Provide(service_factory)}
 
