@@ -56,7 +56,7 @@ arthur.brenno@uniube.br
 Versão: 1.0.0
 """
 
-from .features.screen_chat.controllers import NavegavoController  # type: ignore
+from .features.screen_chat.controllers import ScreenChatController  # type: ignore
 from litestar import Litestar
 
-app = Litestar(route_handlers=[NavegavoController], path="/api")
+app = Litestar(route_handlers=[ScreenChatController], path="/api")
