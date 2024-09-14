@@ -1,29 +1,30 @@
+import os
 import typing
 
 import msgspec
-from llama_index.core.base.llms.types import ChatMessage, ChatResponse
-from openai import OpenAI
+import requests
+
 
 class ScreenChatService(msgspec.Struct, kw_only=True):
-    client: typing.Annotated[
-        OpenAI, msgspec.Meta(title="The Multimodal LLM to use to analise images")
-    ]
-
     messages: typing.Annotated[
-        typing.List[ChatMessage],
+        typing.List[typing.Dict[str, typing.Any]],
         msgspec.Meta(title="Messages", description="A list of messages to chat with"),
     ]
 
-    b64_image: typing.Annotated[
-        typing.Optional[str],
-        msgspec.Meta(
-            title="Base 64 Encoded Image",
-            description="The base 64 encoded image to send to the LLM",
-        ),
-    ] = msgspec.field(default=None)
+    async def execute(self) -> typing.Dict[str, typing.Any]:
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {os.getenv('OPENAI_API_KEY')}",
+        }
 
-    async def execute(self) -> ChatResponse:
-        # Criar image documents aqui
-        self.client.completions.create(messages=)
-        response: ChatResponse = await self.llm.achat(messages=self.messages)
-        return response
+        payload = {
+            "model": "gpt-4o-mini",
+            "messages": self.messages,
+            "max_tokens": 300,
+        }
+
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions", headers=headers, json=payload
+        )
+
+        return response.json()
