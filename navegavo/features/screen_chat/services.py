@@ -2,14 +2,11 @@ import typing
 
 import msgspec
 from llama_index.core.base.llms.types import ChatMessage, ChatResponse
-from llama_index.core.multi_modal_llms.base import MultiModalLLM
-from llama_index.core.multi_modal_llms.generic_utils import load_image_urls
-from llama_index.core.schema import ImageDocument
-
+from openai import OpenAI
 
 class ScreenChatService(msgspec.Struct, kw_only=True):
-    llm: typing.Annotated[
-        MultiModalLLM, msgspec.Meta(title="The Multimodal LLM to use to analise images")
+    client: typing.Annotated[
+        OpenAI, msgspec.Meta(title="The Multimodal LLM to use to analise images")
     ]
 
     messages: typing.Annotated[
@@ -27,5 +24,6 @@ class ScreenChatService(msgspec.Struct, kw_only=True):
 
     async def execute(self) -> ChatResponse:
         # Criar image documents aqui
+        self.client.completions.create(messages=)
         response: ChatResponse = await self.llm.achat(messages=self.messages)
         return response
