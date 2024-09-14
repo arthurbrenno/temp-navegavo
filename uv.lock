@@ -1634,6 +1634,7 @@ dependencies = [
     { name = "matplotlib" },
     { name = "msgspec" },
     { name = "mypy" },
+    { name = "openai" },
     { name = "pillow" },
     { name = "types-pillow" },
 ]
@@ -1651,6 +1652,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.9.2" },
     { name = "msgspec", specifier = ">=0.18.6" },
     { name = "mypy", specifier = ">=1.11.2" },
+    { name = "openai", specifier = ">=1.45.0" },
     { name = "pillow", specifier = ">=10.4.0" },
     { name = "types-pillow", specifier = ">=10.2.0.20240822" },
 ]
