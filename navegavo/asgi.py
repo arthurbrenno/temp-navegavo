@@ -56,7 +56,37 @@ arthur.brenno@uniube.br
 Versão: 1.0.0
 """
 
+from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
 from .features.screen_chat.controllers import ScreenChatController  # type: ignore
+from .features.transcriptions.controllers import TranscriptionsController  # type: ignore
 from litestar import Litestar
+from litestar import MediaType, Request, Response
+import typing
+from .logging import logger
+import uuid
 
-app = Litestar(route_handlers=[ScreenChatController], path="/api")
+
+def internal_server_error_handler(
+    _: Request,
+    exc: Exception,
+) -> Response[typing.Dict[str, typing.Any]]:
+    """
+    Custom exception handler for InternalServerException.
+    """
+
+    error_code = f"{uuid.uuid4().__str__()}{uuid.uuid4().__str__()}"
+
+    logger.exception(exc)
+
+    return Response(
+        media_type=MediaType.JSON,
+        content={"error_code": error_code, "status": HTTP_500_INTERNAL_SERVER_ERROR},
+        status_code=500,
+    )
+
+
+app = Litestar(
+    route_handlers=[ScreenChatController, TranscriptionsController],
+    path="/api",
+    exception_handlers={HTTP_500_INTERNAL_SERVER_ERROR: internal_server_error_handler},
+)
