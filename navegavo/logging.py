@@ -1,6 +1,6 @@
 """Módulo de configuração de logging do app"""
 
-from loguru import logger as loguru_logger 
+from loguru import logger as loguru_logger
 from rich.console import Console
 from rich.theme import Theme
 from rich.traceback import install as install_rich_traceback
