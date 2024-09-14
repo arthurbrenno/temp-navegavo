@@ -11,7 +11,7 @@ from litestar.datastructures import UploadFile
 from .di import client_factory, service_factory
 from .schema import TranscriptionResponse
 from .services import TranscriptionsService
-from groq import Groq
+from openai import OpenAI
 
 
 class TranscriptionsController(Controller):
@@ -27,7 +27,7 @@ class TranscriptionsController(Controller):
         data: typing.Annotated[
             UploadFile, Body(media_type=RequestEncodingType.MULTI_PART)
         ],
-        client: typing.Annotated[Groq, Dependency(skip_validation=True)],
+        client: typing.Annotated[OpenAI, Dependency(skip_validation=True)],
         service: typing.Annotated[
             typing.Type[TranscriptionsService], Dependency(skip_validation=True)
         ],
