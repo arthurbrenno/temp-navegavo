@@ -7,8 +7,9 @@ from litestar.di import Provide
 from litestar.enums import RequestEncodingType
 from litestar.params import Body, Dependency
 from litestar.datastructures import UploadFile
+from litestar.config.response_cache import CACHE_FOREVER
 
-from .di import client_factory, service_factory
+from .di import client_factory, service_cls_factory
 from .schema import TranscriptionResponse
 from .services import TranscriptionsService
 from openai import OpenAI
@@ -18,10 +19,10 @@ class TranscriptionsController(Controller):
     path = "/v1/transcriptions"
     dependencies = {
         "client": Provide(client_factory),
-        "service": Provide(service_factory),
+        "service": Provide(service_cls_factory),
     }
 
-    @post(path="/", media_type=MediaType.TEXT)
+    @post(path="/", cache=CACHE_FOREVER)
     async def get_transcription(
         self,
         data: typing.Annotated[
