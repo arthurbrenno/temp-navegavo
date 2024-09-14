@@ -1,15 +1,14 @@
 import typing
 
 import msgspec
-from llama_index.core.base.llms.types import ChatResponse
 import tempfile
 from litestar.datastructures import UploadFile
-from groq import Groq
+from openai import OpenAI
 
 
 class TranscriptionsService(msgspec.Struct, kw_only=True):
     client: typing.Annotated[
-        Groq, msgspec.Meta(title="Client responsible for transcriptions")
+        OpenAI, msgspec.Meta(title="Client responsible for transcriptions")
     ]
 
     audio_file: typing.Annotated[
@@ -20,13 +19,23 @@ class TranscriptionsService(msgspec.Struct, kw_only=True):
     ]
 
     async def execute(self) -> str:
-        with tempfile.NamedTemporaryFile(mode="wb", delete=True) as tmp:
+        # Get the original filename and extension from the uploaded file
+        original_filename = self.audio_file.filename
+        file_extension = original_filename.split('.')[-1]
+
+        # Ensure the temporary file has the correct extension
+        with tempfile.NamedTemporaryFile(suffix=f'.{file_extension}', mode="wb", delete=False) as tmp:
             tmp.write(await self.audio_file.read())
-            tmp_path = tmp.name
-            transcription = self.client.audio.transcriptions.create(
-                file=(tmp_path, tmp.read()),
-                model="whisper-large-v3",
-                response_format="json",
-                language="en",
-            )
+            tmp.seek(0)  # Ensure we start reading from the beginning of the file
+            
+            # Open the file for reading as bytes for the transcription request
+            with open(tmp.name, "rb") as audio:
+                transcription = self.client.audio.transcriptions.create(
+                    file=audio,  # Pass the file object
+                    model="whisper-1",
+                    response_format="json",
+                    language="pt",
+                )
+
+            # Optionally delete the file after using
             return transcription.text
