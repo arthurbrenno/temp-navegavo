@@ -9,20 +9,23 @@ from litestar.params import Body, Dependency
 from llama_index.core.base.llms.types import ChatResponse
 from llama_index.core.multi_modal_llms.base import MultiModalLLM
 
-from .di import llm_factory, service_factory
+from .di import llm_factory, service_cls_factory
 from .schema import ScreenInfoRequest, ScreenInfoResponse
 from .services import ScreenChatService
 
 
 class ScreenChatController(Controller):
-    path = "/v1"
-    dependencies = {"llm": Provide(llm_factory), "service": Provide(service_factory)}
+    path = "/v1/screen-info"
+    dependencies = {
+        "llm": Provide(llm_factory),
+        "service": Provide(service_cls_factory),
+    }
 
-    @post(path="/screen-info", media_type=MediaType.TEXT)
+    @post(path="/", media_type=MediaType.TEXT)
     async def get_screen_info(
         self,
         data: typing.Annotated[
-            ScreenInfoRequest, Body(media_type=RequestEncodingType.MULTI_PART)
+            ScreenInfoRequest, Body(media_type=RequestEncodingType.JSON)
         ],
         llm: typing.Annotated[MultiModalLLM, Dependency(skip_validation=True)],
         service: typing.Annotated[
