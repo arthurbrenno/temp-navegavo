@@ -13,5 +13,5 @@ async def llm_factory() -> MultiModalLLM:
     return GeminiMultiModal()
 
 
-async def service_factory() -> typing.Type[AsyncService[ChatResponse]]:
+async def service_cls_factory() -> typing.Type[AsyncService[ChatResponse]]:
     return ScreenChatService
