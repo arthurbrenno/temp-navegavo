@@ -5,7 +5,6 @@
 run:
 	clear
 	@echo "Running..."
-	uvx ruff format navegavo
 	uv run python -m navegavo
 
 b:
