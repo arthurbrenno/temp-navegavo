@@ -1,16 +1,13 @@
 import typing
 
 from openai import OpenAI
-from openai.types.completion import Completion
 
-from navegavo.base import AsyncService
-
-from .services import ScreenChatService
+from .services import TextToSpeechService
 
 
-def client_factory() -> OpenAI:
+async def client_factory() -> OpenAI:
     return OpenAI()
 
 
-async def service_cls_factory() -> typing.Type[AsyncService[Completion]]:
-    return ScreenChatService
+async def service_cls_factory() -> typing.Type[TextToSpeechService]:
+    return TextToSpeechService
