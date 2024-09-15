@@ -35,5 +35,5 @@ class TextToSpeechController(Controller):
             typing.Type[TextToSpeechService], Dependency(skip_validation=True)
         ],
     ) -> dict:
-        use_case = service(messages=data.messages)
+        use_case = service(client=client, text=data.text)
         return {"audio": await use_case.execute()}
