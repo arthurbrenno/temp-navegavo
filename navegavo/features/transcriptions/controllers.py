@@ -22,7 +22,7 @@ class TranscriptionsController(Controller):
         "service": Provide(service_cls_factory),
     }
 
-    @post(path="/", cache=CACHE_FOREVER)
+    @post(path="/", cache=False)
     async def get_transcription(
         self,
         data: typing.Annotated[
