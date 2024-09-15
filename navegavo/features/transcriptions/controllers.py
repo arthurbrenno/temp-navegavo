@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import typing
 
-from litestar import Controller, MediaType, post
+from litestar import Controller, post
 from litestar.di import Provide
 from litestar.enums import RequestEncodingType
 from litestar.params import Body, Dependency
