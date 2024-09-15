@@ -22,4 +22,4 @@ class TextToSpeechService(msgspec.Struct, kw_only=True):
         response = self.client.audio.speech.create(
             model="tts-1", voice="alloy", input=self.text
         )
-        return base64.b64encode(response.aread()).decode("utf-8")
+        return base64.b64encode(await response.aread()).decode("utf-8")
