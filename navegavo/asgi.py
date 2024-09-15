@@ -58,6 +58,7 @@ Versão: 1.0.0
 
 import typing
 import uuid
+from litestar.config.cors import CORSConfig
 
 from litestar import Litestar, MediaType, Request, Response
 from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
@@ -92,5 +93,6 @@ def internal_server_error_handler(
 app = Litestar(
     route_handlers=[ScreenChatController, TranscriptionsController, TextToSpeechController],
     path="/api",
+    cors_config=CORSConfig(allow_origins=["*"], allow_methods=["*"]),
     exception_handlers={HTTP_500_INTERNAL_SERVER_ERROR: internal_server_error_handler},
 )
