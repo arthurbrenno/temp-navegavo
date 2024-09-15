@@ -21,7 +21,7 @@ class TextToSpeechController(Controller):
         "service": Provide(service_cls_factory),
     }
 
-    @post(path="/", cache=CACHE_FOREVER)
+    @post(path="/", cache=False)
     async def get_screen_info(
         self,
         data: typing.Annotated[
