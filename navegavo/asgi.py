@@ -56,14 +56,18 @@ arthur.brenno@uniube.br
 Versão: 1.0.0
 """
 
-from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
-from .features.screen_chat.controllers import ScreenChatController  # type: ignore
-from .features.transcriptions.controllers import TranscriptionsController  # type: ignore
-from litestar import Litestar
-from litestar import MediaType, Request, Response
 import typing
-from .logging import logger
 import uuid
+
+from litestar import Litestar, MediaType, Request, Response
+from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
+
+from .features.screen_chat.controllers import ScreenChatController  # type: ignore
+from .features.transcriptions.controllers import (
+    TranscriptionsController,  # type: ignore
+)
+from .features.tts.controllers import TextToSpeechController  # type: ignore
+from .logging import logger
 
 
 def internal_server_error_handler(
@@ -86,7 +90,7 @@ def internal_server_error_handler(
 
 
 app = Litestar(
-    route_handlers=[ScreenChatController, TranscriptionsController],
+    route_handlers=[ScreenChatController, TranscriptionsController, TextToSpeechController],
     path="/api",
     exception_handlers={HTTP_500_INTERNAL_SERVER_ERROR: internal_server_error_handler},
 )
