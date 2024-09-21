@@ -28,6 +28,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Stage 2: Runner
 FROM python:3.10-slim-bullseye
 
+COPY /navegavo /app/navegavo
+
 # Set working directory
 WORKDIR /app
 
@@ -43,4 +45,5 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 EXPOSE 8000
 
 # Use Uvicorn to run the application
+# CMD ["ls", "-l"]
 CMD ["uvicorn", "navegavo.asgi:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
