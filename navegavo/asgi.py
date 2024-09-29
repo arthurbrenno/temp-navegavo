@@ -58,9 +58,10 @@ Versão: 1.0.0
 
 import typing
 import uuid
-from litestar.config.cors import CORSConfig
 
+from dotenv import load_dotenv
 from litestar import Litestar, MediaType, Request, Response
+from litestar.config.cors import CORSConfig
 from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
 
 from .features.screen_chat.controllers import ScreenChatController  # type: ignore
@@ -69,6 +70,8 @@ from .features.transcriptions.controllers import (
 )
 from .features.tts.controllers import TextToSpeechController  # type: ignore
 from .logging import logger
+
+load_dotenv(override=True)
 
 
 def internal_server_error_handler(
